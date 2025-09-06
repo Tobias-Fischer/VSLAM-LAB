@@ -54,7 +54,7 @@ class BaselineVSLAMLab:
             return
 
         log_file_path = os.path.join(self.baseline_path, f'install_{self.baseline_name}.txt')
-        install_command = f"pixi run --frozen -e {self.baseline_name} install -v"
+        install_command = f"pixi run --frozen -e {self.baseline_name} install"
         with open(log_file_path, 'w') as log_file:
             print(f"\n{SCRIPT_LABEL}Installing {self.label}\033[0m : {self.baseline_path}")
             print(f"{ws(6)} log file: {log_file_path}")

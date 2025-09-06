@@ -1,0 +1,9 @@
+dataset_name: dvsevo
+
+rgb_hz: 30.0
+url_download_root: "http://rpg.ifi.uzh.ch/data/EVO/code_examples"
+
+sequence_names:
+  - evo_flyingroom
+  - evo_desk
+  
