@@ -11,6 +11,9 @@ Compare/__pycache__/
 .pixi
 #pixi.lock
 
+#catkin stuff
+.catkin_tools/
+
 # Baselines
 Baselines/DROID-SLAM
 Baselines/DROID-SLAM-DEV
@@ -50,6 +53,7 @@ Baselines/DroidCalib
 Baselines/*.txt*
 Baselines/pyslam
 Baselines/MAGiC-SLAM
+Baselines/USLAM-DEV
 
 path_constants.py
 

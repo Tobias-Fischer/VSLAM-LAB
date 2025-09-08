@@ -34,6 +34,7 @@ droidslam = {features = ["droidslam"], no-default-feature = true}
 droidslam-dev = {features = ["droidslam-dev", "cuda126", "py11"], no-default-feature = true, solve-group = "cuda126py11"}
 dvsevo-dev = {features = ["dvsevo-dev", "x11", "opengl"], no-default-feature = true}
 cmaxslam-dev = {features = ["cmaxslam-dev"], no-default-feature = true}
+uslam-dev = {features = ["uslam-dev"], no-default-feature = true}
 
 # environments end
 
@@ -366,3 +367,54 @@ gsl = "*"
 # qt-main = "*"
 
 # cmaxslam-dev end
+
+
+########################################################################################################################
+########################################################################################################################
+# uslam-dev begin
+[feature.uslam-dev]
+channels = ["conda-forge", "robostack-noetic"]
+platforms = ["linux-64"]
+
+# [feature.uslam-dev.system-requirements]
+# cuda = "12.0"
+
+[feature.uslam-dev.tasks]
+mkdir_uslam = {cmd = "mkdir -p Baselines/USLAM-DEV/catkin_ws/src"}
+git-clone = {cmd = "sh git-clone.sh Tobias-Fischer rpg_ultimate_slam_open USLAM-DEV/catkin_ws/src/uslam", depends-on = ['mkdir_uslam']}
+catkin_config = {cmd = "catkin config --init --mkdirs --merge-devel --cmake-args -DCMAKE_BUILD_TYPE=Release -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DCMAKE_CXX_STANDARD=14", cwd = "Baselines/USLAM-DEV/catkin_ws"}
+vcs-import = {cmd = "vcs-import < uslam/dependencies.yaml", cwd = "Baselines/USLAM-DEV/catkin_ws/src"}
+clean-catkin = {cmd = "catkin clean -y", cwd = "Baselines/USLAM-DEV/catkin_ws"}
+install = {cmd = "catkin build ze_vio_ceres --cmake-args -DCMAKE_BUILD_TYPE=Release -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DCMAKE_CXX_STANDARD=14", cwd = "Baselines/USLAM-DEV/catkin_ws", depends-on = ['catkin_config']}  
+
+[feature.uslam-dev.dependencies]
+# # Build Tools
+compilers="*"
+cmake = "<4"
+make="*"
+bash="*"
+vcstool = "*"
+
+# # ROS Libraries
+ros-noetic-desktop-full = "*"
+ros-noetic-sophus = "*"
+ros-noetic-pcl-ros = "*"
+ros-noetic-eigen-conversions = "*"
+ros-noetic-camera-info-manager = "*"
+ros-noetic-image-view = "*"
+ros-noetic-image-geometry = "*"
+ros-noetic-vision-msgs = "*"
+ros-noetic-rosbag = "*"
+ros-noetic-cv-bridge = "*"
+catkin_tools = "*"
+
+# non-ROS libraries
+yaml-cpp = "*"
+glog = "*"
+gflags = "*"
+gsl = "*"
+eigen= "*"
+ceres-solver = "<2"
+suitesparse = "*"
+
+# uslam-dev end
